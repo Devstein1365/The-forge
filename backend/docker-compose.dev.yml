@@ -17,6 +17,11 @@ services:
   mysql:
     image: mysql:8.0
     container_name: netmarket-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: netdb
+      MYSQL_USER: netmarket
+      MYSQL_PASSWORD: netmarket123
     restart: always
     ports:
       - '3306:3306'
