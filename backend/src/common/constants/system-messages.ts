@@ -37,6 +37,7 @@ export const SystemMessages = {
     RESEND_OTP_SUCCESS: 'Otp Resent successfully',
     INVALID_CREDENTIALS: 'Invalid credentials',
     INVALID_OTP: 'Invalid otp code',
+    INVALID_PASSORD: 'Password is invalid',
   },
 
   USER_CRUD: {
@@ -54,5 +55,9 @@ export const SystemMessages = {
   PERMISSION: {
     RETRIEVE_SUCCESS: 'Permission retrieved successfully',
     CREATE_SUCCESS: 'Permission creaed successfully',
+  },
+
+  ADMIN: {
+    PASSWORD_SENT: 'Admin access password sent',
   },
 };

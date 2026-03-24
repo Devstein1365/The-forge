@@ -9,7 +9,7 @@ export class UserEntity {
   roles: Role[];
 
   @Exclude()
-  password: string;
+  password: string | null;
 
   @Exclude()
   resetToken: string | null;
