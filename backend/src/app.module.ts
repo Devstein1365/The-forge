@@ -13,12 +13,14 @@ import { LoggerModule } from './common/logger/logger.module';
 
 import { AppConfigModule } from './config/app.config.module';
 import { PrismaModule } from './database/prisma.module';
+import { RoleModule } from './modules/role/role.module';
 
 @Module({
   imports: [
     AppConfigModule,
     LoggerModule,
     PrismaModule,
+    RoleModule,
     ThrottlerModule.forRoot([
       {
         name: 'default',

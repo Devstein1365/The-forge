@@ -7,7 +7,7 @@ import {
   BadRequestException,
 } from '@nestjs/common';
 import { HttpAdapterHost } from '@nestjs/core';
-import { SYSTEM_MESSAGES } from '../constants/system-messages';
+import { SystemMessages } from '../constants/system-messages';
 import { CombinedLogger } from '../logger/combined.logger';
 
 @Catch()
@@ -29,7 +29,7 @@ export class AllExceptionsFilter implements ExceptionFilter {
         : HttpStatus.INTERNAL_SERVER_ERROR;
 
     // Handle validation errors specially
-    let message = exception.message || SYSTEM_MESSAGES.INTERNAL_SERVER_ERROR;
+    let message = exception.message || SystemMessages.INTERNAL_SERVER_ERROR;
     let errors = undefined;
 
     if (exception instanceof BadRequestException) {
@@ -57,11 +57,11 @@ export class AllExceptionsFilter implements ExceptionFilter {
       path: httpAdapter.getRequestUrl(ctx.getRequest()),
     };
 
-    this.logger.error(
-      `${method} ${url} - ${httpStatus} - ${ip}\nResponse: ${JSON.stringify(responseBody)}`,
-      exception.stack || '',
-      AllExceptionsFilter.name,
-    );
+    // this.logger.error(
+    //   `${method} ${url} - ${httpStatus} - ${ip}\nResponse: ${JSON.stringify(responseBody)}`,
+    //   exception.stack || '',
+    //   AllExceptionsFilter.name,
+    // );
 
     httpAdapter.reply(response, responseBody, httpStatus);
   }

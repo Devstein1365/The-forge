@@ -1,4 +1,4 @@
-export const SYSTEM_MESSAGES = {
+export const SystemMessages = {
   // general messages
   INTERNAL_SERVER_ERROR:
     'An unexpected error occurred. Please try again later.',
@@ -29,5 +29,17 @@ export const SYSTEM_MESSAGES = {
     PASSWORD_RESET_EMAIL_FAILED: 'Failed to send reset email',
     PASSWORD_RESET_SUCCESS: 'Password reset successfully',
     PASSWORD_RESET_FAILED: 'Failed to reset password',
+  },
+
+  USER_CRUD: {
+    USER_NOT_FOUND: 'User not found',
+    USER_EMAIL_EXISTS: 'Email already exists',
+  },
+  ROLE: {
+    USER_HAS_NO_ROLES: 'User has no role',
+    NOT_FOUND: 'Role not found',
+    EXIST: 'Role already exist',
+    RETRIEVE_SUCCESS: 'Role successfully retrieved',
+    UPDATE_SUCCESS: 'Role successfully updated',
   },
 };

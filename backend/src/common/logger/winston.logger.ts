@@ -7,7 +7,7 @@ import 'winston-daily-rotate-file';
 export class WinstonLogger implements LoggerService {
   private readonly logger: Logger;
   private context: string = 'Application';
-  private readonly serviceName: string = 'One-power';
+  private readonly serviceName: string = 'NetMarket';
   private readonly isProd: boolean = process.env.NODE_ENV === 'production';
   private readonly jsonFormat = printf((info) => {
     return JSON.stringify({

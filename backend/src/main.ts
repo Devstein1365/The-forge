@@ -7,6 +7,7 @@ import { CorsOptions } from '@nestjs/common/interfaces/external/cors-options.int
 import { ConfigService } from '@nestjs/config';
 
 async function bootstrap() {
+  console.log('DATABASE_URL:', process.env.DATABASE_URL);
   const app = await NestFactory.create(AppModule, {
     logger:
       process.env.NODE_ENV === 'production'
@@ -15,7 +16,7 @@ async function bootstrap() {
   });
 
   const configService = app.get(ConfigService);
-  const port = configService.get<number>('app.port') || 8000;
+  const port = configService.get<number>('app.port') || 8080;
 
   // CORS Configuration
   const corsOptions: CorsOptions = {

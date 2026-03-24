@@ -6,7 +6,7 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
+ provider = "postgresql"
   url      = env("DATABASE_URL")
 
 }
@@ -18,11 +18,13 @@ model User {
   firstName         String
   lastName          String
   password          String  
-  profilePic    String?
+  profilePic        String?
   lastLogin         DateTime?
-   resetToken        String?
-  created_at     DateTime @default(now())
-  updated_at     DateTime @updatedAt
+  resetToken        String?
+  expiresAt         DateTime?
+  verificationToken String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
   isDeleted         Boolean   @default(false)
   
   // Relationships
@@ -36,7 +38,10 @@ model Shop {
   name   String       @unique
   city   String    
   state  String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 
+  //Relationships
   user     User      @relation(fields: [userId], references: [id])
 }
 
@@ -46,5 +51,30 @@ model Role{
   description String
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
-   users       User[]       @relation("UsersRoles")
+
+// Relationships
+  permissions Permission[] @relation("RolesPermissions")
+  users       User[]       @relation("UsersRoles")
+}
+
+model Permission {
+  id          String   @id @default(uuid())
+  name        String   @unique
+  description String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relationships
+  roles Role[] @relation("RolesPermissions")
+}
+
+model MailLog {
+  id        String   @id @default(cuid())
+  to        String
+  subject   String
+  status    String
+  error     String?
+  sentAt    DateTime @default(now())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
