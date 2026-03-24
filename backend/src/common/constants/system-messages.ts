@@ -29,6 +29,14 @@ export const SystemMessages = {
     PASSWORD_RESET_EMAIL_FAILED: 'Failed to send reset email',
     PASSWORD_RESET_SUCCESS: 'Password reset successfully',
     PASSWORD_RESET_FAILED: 'Failed to reset password',
+    EMAIL_VERIFY_SUCCESS: 'Failed to verify email',
+    EMAIL_ALREADY_VERIFIED: 'Email alfeady verified',
+    EMAIL_NOT_VERIFIED: 'Email not verified',
+    RESET_MAIL_SENT: 'Reset email sent',
+    RESET_SUCCESS: 'Credentials successfully updated',
+    RESEND_OTP_SUCCESS: 'Otp Resent successfully',
+    INVALID_CREDENTIALS: 'Invalid credentials',
+    INVALID_OTP: 'Invalid otp code',
   },
 
   USER_CRUD: {

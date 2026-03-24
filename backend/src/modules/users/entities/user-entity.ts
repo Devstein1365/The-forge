@@ -13,9 +13,11 @@ export class UserEntity {
 
   @Exclude()
   resetToken: string | null;
+  @Exclude()
+  isVerified: boolean;
 
   @Exclude()
-  expiresAt: Date;
+  expiresAt: Date | null;
 
   @Exclude()
   createdAt: Date;

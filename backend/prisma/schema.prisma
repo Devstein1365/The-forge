@@ -23,6 +23,7 @@ model User {
   resetToken        String?
   expiresAt         DateTime?
   verificationToken String?
+  isVerified        Boolean   @default(false)
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
   isDeleted         Boolean   @default(false)
