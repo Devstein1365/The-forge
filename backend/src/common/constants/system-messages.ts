@@ -50,4 +50,9 @@ export const SystemMessages = {
     RETRIEVE_SUCCESS: 'Role successfully retrieved',
     UPDATE_SUCCESS: 'Role successfully updated',
   },
+
+  PERMISSION: {
+    RETRIEVE_SUCCESS: 'Permission retrieved successfully',
+    CREATE_SUCCESS: 'Permission creaed successfully',
+  },
 };

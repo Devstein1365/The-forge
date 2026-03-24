@@ -14,6 +14,7 @@ import { LoggerModule } from './common/logger/logger.module';
 import { AppConfigModule } from './config/app.config.module';
 import { PrismaModule } from './database/prisma.module';
 import { RoleModule } from './modules/role/role.module';
+import { AuthModule } from './modules/auth/auth.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { RoleModule } from './modules/role/role.module';
     LoggerModule,
     PrismaModule,
     RoleModule,
+    AuthModule,
     ThrottlerModule.forRoot([
       {
         name: 'default',
