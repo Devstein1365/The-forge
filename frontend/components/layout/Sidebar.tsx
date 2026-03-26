@@ -39,20 +39,22 @@ export function Sidebar({ isSeller = false }: { isSeller?: boolean }) {
 
   return (
     <div
-      className={`hidden md:flex flex-col bg-nm-white border-r border-nm-grey-200 h-screen sticky top-0 transition-all duration-300 ${
+      className={`hidden md:flex flex-col bg-nm-white/80 backdrop-blur-xl border-r border-nm-grey-200/50 h-screen sticky top-0 transition-all duration-300 z-40 ${
         isCollapsed ? "w-20" : "w-64"
       }`}
     >
       <div
-        className={`p-4 flex items-center border-b border-nm-grey-100 ${isCollapsed ? "justify-center" : "justify-between"}`}
+        className={`p-4 flex items-center border-b border-nm-grey-200/50 ${
+          isCollapsed ? "justify-center" : "justify-between"
+        }`}
       >
         {!isCollapsed && (
           <div className="flex flex-col whitespace-nowrap overflow-hidden">
-            <h1 className="text-2xl font-bold italic text-nm-green tracking-tight">
+            <h1 className="text-2xl font-bold italic bg-gradient-to-r from-nm-green to-teal-500 bg-clip-text text-transparent tracking-tight">
               NetMarket
             </h1>
             {isSeller && (
-              <span className="text-[10px] bg-nm-gold px-2 py-0.5 rounded-full mt-1 inline-block font-bold text-nm-black uppercase w-max">
+              <span className="text-[10px] bg-nm-gold/20 text-yellow-700 px-2 py-0.5 rounded-full mt-1 inline-block font-bold uppercase w-max tracking-wider">
                 Vendor Portal
               </span>
             )}
@@ -61,37 +63,47 @@ export function Sidebar({ isSeller = false }: { isSeller?: boolean }) {
 
         <button
           onClick={() => setIsCollapsed(!isCollapsed)}
-          className="p-2 rounded-full hover:bg-nm-grey-100 text-nm-grey-500 hover:text-nm-black transition-colors shrink-0"
+          className="p-2 rounded-full hover:bg-nm-grey-100 text-nm-grey-500 hover:text-nm-black transition-all hover:scale-105 shrink-0 shadow-sm border border-transparent hover:border-nm-grey-200"
         >
           {isCollapsed ? (
-            <FaChevronRight size={16} />
+            <FaChevronRight size={14} />
           ) : (
-            <FaChevronLeft size={16} />
+            <FaChevronLeft size={14} />
           )}
         </button>
       </div>
 
       <nav
-        className={`flex-1 overflow-y-auto overflow-x-hidden space-y-2 mt-4 ${isCollapsed ? "px-2" : "px-4"}`}
+        className={`flex-1 overflow-y-auto overflow-x-hidden space-y-2 mt-6 ${
+          isCollapsed ? "px-3" : "px-4"
+        }`}
       >
         {navItems.map((item) => {
-          const isActive = pathname === item.href;
+          const isActive = pathname === item.href || (item.href !== '/' && item.href !== '/seller' && pathname.startsWith(item.href));
           return (
             <Link
               key={item.label}
               href={item.href}
               title={isCollapsed ? item.label : undefined}
-              className={`flex items-center gap-4 rounded-xl font-medium transition-all duration-300 ${
+              className={`group flex items-center gap-4 rounded-xl font-medium transition-all duration-300 relative overflow-hidden ${
                 isCollapsed ? "justify-center p-3" : "py-3 px-4"
               } ${
                 isActive
-                  ? "bg-nm-green text-nm-white shadow-sm"
-                  : "text-nm-grey-600 hover:bg-nm-grey-100 hover:text-nm-black"
+                  ? "text-nm-white shadow-md shadow-nm-green/20"
+                  : "text-nm-grey-600 hover:text-nm-green"
               }`}
             >
-              <item.icon size={isCollapsed ? 22 : 20} className="shrink-0" />
+              {/* Active Background */}
+              <div 
+                className={`absolute inset-0 bg-gradient-to-r from-nm-green to-teal-500 transition-opacity duration-300 ${
+                  isActive ? "opacity-100" : "opacity-0 group-hover:opacity-10"
+                }`}
+              />
+
+              <item.icon size={isCollapsed ? 22 : 20} className={`shrink-0 relative z-10 transition-transform duration-300 ${isActive ? 'scale-110' : 'group-hover:scale-110'}`} />
+              
               {!isCollapsed && (
-                <span className="whitespace-nowrap">{item.label}</span>
+                <span className="whitespace-nowrap relative z-10">{item.label}</span>
               )}
             </Link>
           );
@@ -99,7 +111,9 @@ export function Sidebar({ isSeller = false }: { isSeller?: boolean }) {
       </nav>
 
       <div
-        className={`border-t border-nm-grey-200 mt-auto ${isCollapsed ? "p-4 flex justify-center" : "p-4 m-4"}`}
+        className={`border-t border-nm-grey-200/50 mt-auto ${
+          isCollapsed ? "p-4 flex justify-center" : "p-4 m-4 bg-nm-grey-100/50 rounded-2xl"
+        }`}
       >
         <Link
           href={isSeller ? "/" : "/seller"}
@@ -108,15 +122,16 @@ export function Sidebar({ isSeller = false }: { isSeller?: boolean }) {
               ? `Switch to ${isSeller ? "Buyer" : "Seller"}`
               : undefined
           }
-          className={`flex items-center text-sm text-nm-grey-500 hover:text-nm-black transition-colors font-bold ${
-            isCollapsed ? "justify-center" : "gap-2"
+          className={`flex items-center text-sm font-bold transition-all duration-300 group ${
+            isCollapsed ? "justify-center text-nm-grey-400 hover:text-nm-black" : "justify-between w-full text-nm-grey-600 hover:text-nm-black"
           }`}
         >
-          {isCollapsed ? (
-            <FaExchangeAlt size={20} />
-          ) : (
-            `Switch to ${isSeller ? "Buyer" : "Seller"} View`
+          {!isCollapsed && (
+            <span>{isSeller ? "Exit Vendor" : "Become Vendor"}</span>
           )}
+          <div className={`p-2 rounded-full transition-colors duration-300 ${isCollapsed ? '' : 'bg-white shadow-sm group-hover:bg-nm-black group-hover:text-white'}`}>
+             <FaExchangeAlt size={isCollapsed ? 20 : 14} />
+          </div>
         </Link>
       </div>
     </div>
