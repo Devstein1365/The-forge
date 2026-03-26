@@ -12,7 +12,7 @@ export default function SellerLayout({
       <div className="flex-1 flex flex-col h-full overflow-hidden w-full relative">
         <header className="md:hidden flex justify-between items-center bg-nm-white p-4 sticky top-0 z-40 border-b border-nm-grey-100">
           <h1 className="text-xl tracking-tight font-bold italic text-nm-green">
-            The Digital Harvest{" "}
+            NetMarket{" "}
             <span className="text-xs bg-nm-gold px-2 py-0.5 rounded-full not-italic text-nm-white uppercase ml-2">
               Vendor
             </span>
